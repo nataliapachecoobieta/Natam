@@ -8,6 +8,7 @@ USE Natam ;
 
 Create Table if not exists Passenger(
 id_passenger int not null ,
+
 rut_passenger int not null,
 first_name Varchar (20) not null,
 last_name Varchar (20) not null,
@@ -15,6 +16,13 @@ Phone_number varchar (15) not null,
 email Varchar (35) not null,
 birthdate date,
 primary key (id_passenger));
+
+ALTER TABLE passenger 
+ADD id_luggage int not null ;
+
+Alter Table Passenger add constraint fk_Passenger foreign key (id_luggage) references luggage(id_luggage);
+ 
+
 
 
 
