@@ -17,10 +17,9 @@ email Varchar (35) not null,
 birthdate date,
 primary key (id_passenger));
 
-ALTER TABLE passenger 
-ADD id_luggage int not null ;
+-- ALTER TABLE passenger ADD id_luggage int not null ;--
 
-Alter Table Passenger add constraint fk_Passenger foreign key (id_luggage) references luggage(id_luggage);
+-- Alter Table Passenger add constraint fk_Passenger foreign key (id_luggage) references luggage(id_luggage);--
  
 
 
