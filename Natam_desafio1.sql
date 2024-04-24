@@ -1,18 +1,18 @@
-DROP SCHEMA  IF  EXISTS    Natam ;
-CREATE SCHEMA IF NOT EXISTS  Natam;
-USE Natam ;
+DROP SCHEMA  IF  EXISTS    natam ;
+CREATE SCHEMA IF NOT EXISTS  natam;
+USE natam ;
 
 -- Drop Table If exists Natam;
 -- Create Table if not exists Natam(-- 
 
 
-Create Table if not exists Passenger(
+Create Table if not exists passenger(
 id_passenger int not null ,
 id_luggage int not null ,
 rut_passenger int not null,
 first_name Varchar (20) not null,
 last_name Varchar (20) not null,
-Phone_number varchar (15) not null,
+phone_number varchar (15) not null,
 email Varchar (35) not null,
 birthdate date,
 primary key (id_passenger));
@@ -88,6 +88,7 @@ flight_number int not null,
 id_passenger int not null,
 first_name Varchar (20) not null,
 last_name Varchar (20) not null,
+weight int not null,
 primary key (id_luggage)
 );
 
@@ -110,14 +111,16 @@ primary key (id_luggage)
 
 create Table if not exists flight (
 id_flight int not null,
-id_passenger int not null ,
 origen varchar(20)not null,
 destination  varchar (20)not null,
 passengers_numbers int not null,
 name_capitan varchar (20)not null,
 last_name_capitan varchar (20)not null,
 date_flight date not null,
-primary key (id_flight));
+primary key (id_flight, date_flight));
+
+ALTER TABLE flight ADD INDEX idx_date_flight (date_flight);
+
 
 
 
@@ -142,7 +145,7 @@ primary key (id_flight));
 
 
 
-Create Table if not exists AirPort(
+Create Table if not exists airport(
 id_flight int not null,
 id_airline int not null ,
 id_Airport Varchar (10) not null,
@@ -172,7 +175,7 @@ primary key (id_Airport)
 (15, 115, 515, 'Caracas', 'Venezuela');*/
 
 
-Create  Table  if not exists Airline  (
+Create  Table  if not exists airline  (
 id_airline int not null auto_increment,
 id_crew int not null,
 primary key (id_airline)
@@ -236,7 +239,7 @@ RENAME COLUMN birthdate TO birthday = DONE ;
 (215, 15, '78901234-5', 'Mia', 'Perez', '678-901-2345', 'mia.perez@example.com', '1997-11-08');*/
 
 
-Create Table Aircraft (
+Create Table aircraft (
 id_flight int not null,
 model varchar (15)not null,
 id_plate varchar (15) not null,
@@ -265,21 +268,26 @@ VALUES
 (15, 'Boeing 777', 'QRS345', 6300);*/
 
 
+create Table if not exists flight_passenger (
+id_flight int not null,
+date_flight date not null,
+id_passenger int not null ,
+primary key (id_flight,date_flight,id_passenger)
+);
 
-Alter Table Passenger add constraint fk_Passenger foreign key (id_luggage) references luggage(id_luggage);
-Alter Table flight_ticket add constraint  FK_flight_ticket foreign key (id_passenger) references Passenger(id_passenger);
-Alter Table luggage add constraint FK_luggage foreign key (id_passenger) references Passenger(id_passenger);
-Alter Table flight add constraint FK_flight foreign key (id_passenger) references Passenger(id_passenger);
-Alter Table Airport add constraint FK_airport1 foreign key (id_flight) references Flight(id_flight);
-Alter Table Airport add constraint FK_airport2 foreign key (id_airline) references Airline (id_airline);
+
+Alter Table flight_ticket add constraint  FK_flight_ticket foreign key (id_passenger) references passenger(id_passenger);
+Alter Table luggage add constraint FK_luggage foreign key (id_passenger) references passenger(id_passenger);
+Alter Table airport add constraint FK_airport1 foreign key (id_flight) references Flight(id_flight);
+Alter Table airport add constraint FK_airport2 foreign key (id_airline) references Airline (id_airline);
 Alter Table flight_crew add constraint FK_flight_crew foreign key (id_flight) references flight(id_flight);
-Alter table Airline add constraint FK_Airline foreign key (id_crew) references Flight_crew (id_crew);
-Alter table Aircraft add constraint FK_Aircraft foreign key (id_flight) references flight(id_flight);
-
+Alter table airline add constraint FK_airline foreign key (id_crew) references Flight_crew (id_crew);
+Alter table aircraft add constraint FK_aircraft foreign key (id_flight) references flight(id_flight);
+Alter Table flight_passenger add constraint  FK_flight_passenger foreign key (id_flight) references flight (id_flight);
+Alter Table flight_passenger add constraint  FK_1_flight_passenger foreign key (date_flight) references flight(date_flight);
+Alter Table flight_passenger add constraint  FK_2_flight_passenger foreign key (id_passenger) references passenger(id_passenger);
 ALTER TABLE luggage
 ADD CONSTRAINT FK_luggage_passenger FOREIGN KEY (id_passenger) REFERENCES passenger(id_passenger);
-
-
 
 
 
