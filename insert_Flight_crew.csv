@@ -1,0 +1,16 @@
+id_crew,id_flight,rut_crew,first_name,last_name,Phone_number,email,birthday
+201,FL123,1001,John,Doe,123-456-7890,john.doe@example.com,2022-04-01
+202,FL456,1002,Jane,Smith,987-654-3210,jane.smith@example.com,2022-04-02
+203,FL789,1003,Alice,Johnson,456-789-0123,alice.johnson@example.com,2022-04-03
+204,FL101,1004,Michael,Johnson,234-567-8901,michael.johnson@example.com,2022-04-04
+205,FL222,1005,Emily,Brown,890-123-4567,emily.brown@example.com,2022-04-05
+206,FL444,1006,Daniel,Martinez,678-901-2345,daniel.martinez@example.com,2022-04-06
+207,FL228,1007,Sophia,Taylor,345-678-9012,sophia.taylor@example.com,2022-04-07
+208,FL555,1008,Matthew,Anderson,012-345-6789,matthew.anderson@example.com,2022-04-08
+209,FL777,1009,Olivia,Wilson,890-123-4567,olivia.wilson@example.com,2022-04-09
+210,FL888,1010,David,Lee,456-789-0123,david.lee@example.com,2022-04-10
+211,FL999,1011,Emma,Garcia,678-901-2345,emma.garcia@example.com,2022-04-11
+212,FL111,1012,James,Lopez,345-678-9012,james.lopez@example.com,2022-04-12
+213,FL232,1013,Isabella,Hernandez,123-456-7890,isabella.hernandez@example.com,2022-04-13
+214,FL281,1014,Alexander,Gonzalez,890-123-4567,alexander.gonzalez@example.com,2022-04-14
+215,FL330,1015,Mia,Perez,678-901-2345,mia.perez@example.com,2022-04-15
