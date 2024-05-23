@@ -276,7 +276,7 @@ drop VIEW vw__vuelo_crew_Doe ;
  -- FUNCIONES : 
 -- Cuantos pasajeros son mayores de 18 años --
 
- DROP FUNCTION IF EXISTS es_mayores_18;
+ DROP FUNCTION IF EXISTS mayores_18;
 DELIMITER $$ 
 CREATE FUNCTION mayores_18 (  p_birthdate date ) 
 RETURNS boolean
@@ -285,7 +285,6 @@ BEGIN
 DECLARE v_mayores_18  boolean;
 -- SQL 
 select p_birthdate <= DATE_SUB(CURDATE(), INTERVAL 18 YEAR) As mayores_18
-from passenger
 into v_mayores_18;
 RETURN v_mayores_18;
 END$$ 
@@ -346,11 +345,11 @@ select id_flight,vuelo_sobre_90(passengers_numbers) as es_sobre_90 from flight;
 
 -- PROCEDURE-- 
 
-DROP PROCEDURE IF EXISTS obtener_informacion_pasajero;
+DROP PROCEDURE IF EXISTS SP_obtener_informacion_pasajero;
 
 DELIMITER //
 
-CREATE PROCEDURE pr_obtener_informacion_pasajero( in id_pasajero INT)
+CREATE PROCEDURE SP_obtener_informacion_pasajero( in id_pasajero INT)
 BEGIN
     DECLARE rut_pasajero INT;
     DECLARE primer_nombre VARCHAR(20);
@@ -370,16 +369,16 @@ END//
 DELIMITER ;
 
 
-call  pr_obtener_informacion_pasajero(1);
+call  SP_obtener_informacion_pasajero(1);
 
 DELIMITER //
 
 
 
-drop procedure  pr_insertar_y_eliminar_tripulante;
+drop procedure  SP_insertar_y_eliminar_tripulante;
 DELIMITER //
 
-CREATE PROCEDURE pr_insertar_y_eliminar_tripulante(
+CREATE PROCEDURE SP_insertar_y_eliminar_tripulante(
     -- IN id_crew int -- este parametro es autoincremental no se debe poner ya que si tiene esta condicion el sistema  va hacerlo entonces se omite , si este no tiene esta condision se debe poner como parametro --
     IN id_flight varchar (20),
     IN rut_tripulante VARCHAR(30),
@@ -416,7 +415,7 @@ END//
 DELIMITER ;
 
 -- Aca es donde tienes que insertar o eliminar, como siempre --
-CALL pr_insertar_y_eliminar_tripulante(
+CALL SP_insertar_y_eliminar_tripulante(
     'FL101',
     '123456789',
     'Juan',
@@ -508,8 +507,6 @@ BEGIN
     END//
 
 DELIMITER ;
-
-
 
 
 

@@ -91,6 +91,18 @@ primary key (id_flight,date_flight,id_passenger)
 );
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 /*
  select *
  from flight;
@@ -118,63 +130,7 @@ primary key (id_flight,date_flight,id_passenger)
  
  select *
  from flight_passenger;
- */
 
 
 
-
- -- Catidad de  vuelos operaron el mes de febrero de 2023--
-DELIMITER $$ 
-CREATE FUNCTION cantidad_vuelos  () 
-RETURNS int 
-DETERMINISTIC
-BEGIN 
-DECLARE cantidad_vuelos  int ;
--- SQL 
-select count(*)  as cantidad_vuelos 
-from flight 
-where flight.date_flight BETWEEN  '2023-02-01' and '2023-02-28'
-limit 1
-into cantidad_vuelos;
-RETURN cantidad_vuelos;
-END$$ 
-DELIMITER ;
-
-select cantidad_vuelos();
-
-
--- FUNCIONES--
-
-DELIMITER $$ 
-CREATE FUNCTION id_vuelo (ciudad varchar(20)) 
-RETURNS varchar(20)
-DETERMINISTIC 
-BEGIN 
-DECLARE V_CIUDAD varchar (20);
--- SQL 
-select flight.origen into v_ciudad
-from flight 
-Where flight.id_flight = 1 ;
-RETURN V_CIUDAD ;
-END$$ 
-DELIMITER ;
-
-select id_vuelo (ciudad);
-
-
-select  get_last_flight_info (id_passenger) from passenger ;
-
-DELIMITER  $$ 
-
-
-CREATE FUNCTION count_flight_tickets(passenger_id INT) RETURNS INT
-BEGIN
-    DECLARE ticket_count INT;
-    SELECT COUNT(*) INTO ticket_count
-    FROM flight_ticket
-    WHERE id_passenger = passenger_id;
-    RETURN ticket_count;
-END
-
-DELIMITER ;
 
